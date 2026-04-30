@@ -12,8 +12,9 @@ function num(v) {
 }
 
 function csvParse(text) {
-  const lines = text.trim().split(/\r?\n/);
+  const lines = text.trim().split(/\r?\n/).filter(Boolean);
   const headers = lines.shift().split(",").map(h => h.trim());
+
   return lines.map(line => {
     const cols = line.split(",");
     const obj = {};
