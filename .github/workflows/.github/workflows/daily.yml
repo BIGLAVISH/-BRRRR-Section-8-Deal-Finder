@@ -31,3 +31,4 @@ jobs:
           git add data/*
           git commit -m "Daily deal update" || echo "No changes"
           git push
+ 
