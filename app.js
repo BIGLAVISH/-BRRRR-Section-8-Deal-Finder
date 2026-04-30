@@ -1,5 +1,4 @@
 let deals = [];
-
 const money = n => "$" + Number(n || 0).toLocaleString();
 
 async function loadDeals() {
@@ -10,6 +9,8 @@ async function loadDeals() {
     updateStats(data.updated_at);
     render(deals);
     alerts(deals);
+    activity(deals);
+    lenderBoard(deals);
   } catch {
     document.getElementById("deals").innerHTML = "<tr><td>No data yet. Upload CSV or run GitHub Action.</td></tr>";
   }
@@ -17,10 +18,8 @@ async function loadDeals() {
 
 function updateStats(updatedAt = "-") {
   document.getElementById("count").innerText = deals.length;
-  document.getElementById("callFirst").innerText =
-    deals.filter(d => d.recommendation === "CALL FIRST").length;
-  document.getElementById("updated").innerText =
-    updatedAt && updatedAt !== "-" ? updatedAt.slice(0, 10) : "-";
+  document.getElementById("callFirst").innerText = deals.filter(d => d.recommendation === "CALL FIRST").length;
+  document.getElementById("updated").innerText = updatedAt && updatedAt !== "-" ? updatedAt.slice(0,10) : "-";
 }
 
 function aiScore(d) {
@@ -48,30 +47,27 @@ function lenderMatch(d) {
   const dscr = Number(d.estimated_dscr || 0);
   const seller = String(d.seller_finance_probability || "").toLowerCase();
 
-  if (seller.includes("high")) return "Seller finance + private gap lender";
-  if (units >= 5 && dscr >= 1.2) return "DSCR multifamily lender";
-  if (score >= 75 && equity >= 100000) return "Private lender / BRRRR lender";
-  if (equity >= 50000) return "Hard money lender";
-  return "Creative finance / renegotiate";
+  if (seller.includes("high")) return "Seller Finance + Gap Lender";
+  if (units >= 5 && dscr >= 1.2) return "DSCR Multifamily Lender";
+  if (score >= 75 && equity >= 100000) return "Private BRRRR Lender";
+  if (equity >= 50000) return "Hard Money Lender";
+  return "Creative Finance / Renegotiate";
 }
 
 function smsLink(d) {
   const body =
 `HOT DEAL ALERT
 
-Address: ${d.address || ""}
-City: ${d.city || ""}
-State: ${d.state || ""}
+${d.address || ""}
+${d.city || ""}, ${d.state || ""}
 Units: ${d.units || ""}
 Ask: ${money(d.asking_price)}
 ARV: ${money(d.est_arv)}
-Rehab: ${money(d.est_rehab)}
 Equity: ${money(d.created_equity)}
-DSCR: ${d.estimated_dscr || ""}
-AI Score: ${aiScore(d)}
-Lender Match: ${lenderMatch(d)}
+Score: ${aiScore(d)}
+Lender: ${lenderMatch(d)}
 
-Next move: Call seller and push seller-finance / low-down terms.`;
+Next move: Call seller and push low-down / seller-finance terms.`;
 
   return `sms:?&body=${encodeURIComponent(body)}`;
 }
@@ -79,24 +75,25 @@ Next move: Call seller and push seller-finance / low-down terms.`;
 function alerts(rows) {
   const hot = rows
     .filter(d => aiScore(d) >= 65 || d.recommendation === "CALL FIRST")
-    .sort((a, b) => aiScore(b) - aiScore(a))
-    .slice(0, 8);
+    .sort((a,b) => aiScore(b) - aiScore(a))
+    .slice(0,5);
 
   document.getElementById("alertCount").innerText = hot.length;
 
   document.getElementById("alerts").innerHTML = hot.length
     ? hot.map(d => `
       <div class="deal-card">
-        🔥 <b>${d.address || "Unknown Address"}</b><br>
-        ${d.city || ""}, ${d.state || ""}<br>
-        Units: ${d.units || ""}<br>
-        Ask: ${money(d.asking_price)}<br>
-        ARV: ${money(d.est_arv)}<br>
-        Equity: ${money(d.created_equity)}<br>
-        Score: ${aiScore(d)}<br>
-        Lender: ${lenderMatch(d)}<br><br>
-        <a class="btn" href="${smsLink(d)}">Send SMS Alert</a>
-        <a class="btn" href="tel:${d.contact_phone || ""}">Call Seller</a>
+        <div class="thumb">🏚️</div>
+        <div>
+          <b>${d.address || "Unknown Address"}</b>
+          <p>${d.city || ""}, ${d.state || ""} • ${d.units || ""} Units</p>
+          <p>Score: ${aiScore(d)} • Equity: ${money(d.created_equity)}</p>
+          <span>${d.recommendation || "REVIEW"}</span>
+          <div>
+            <a class="mini green" href="${smsLink(d)}">SMS</a>
+            <a class="mini gold" href="tel:${d.contact_phone || ""}">Call</a>
+          </div>
+        </div>
       </div>
     `).join("")
     : `<div class="deal-card">No hot alerts yet.</div>`;
@@ -105,18 +102,8 @@ function alerts(rows) {
 function render(rows) {
   document.getElementById("deals").innerHTML = `
     <tr>
-      <th>Rec</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Units</th>
-      <th>Ask</th>
-      <th>ARV</th>
-      <th>Equity</th>
-      <th>Score</th>
-      <th>Lender</th>
-      <th>Call</th>
-      <th>SMS</th>
+      <th>Rec</th><th>Address</th><th>City</th><th>State</th><th>Units</th>
+      <th>Ask</th><th>ARV</th><th>Equity</th><th>Score</th><th>Lender</th><th>Call</th><th>SMS</th>
     </tr>
     ${rows.map(d => `
       <tr>
@@ -137,12 +124,32 @@ function render(rows) {
   `;
 }
 
+function activity(rows) {
+  document.getElementById("activity").innerHTML = rows.slice(0,5).map(d =>
+    `<li>New deal added: <b>${d.address || "Unknown"}</b><br><small>${aiScore(d)} score • ${lenderMatch(d)}</small></li>`
+  ).join("");
+}
+
+function lenderBoard(rows) {
+  const lenders = {};
+  rows.forEach(d => lenders[lenderMatch(d)] = (lenders[lenderMatch(d)] || 0) + 1);
+
+  document.getElementById("lenders").innerHTML = Object.entries(lenders).map(([name,count]) =>
+    `<div class="lender"><span>${name}</span><b>${count} Deals</b></div>`
+  ).join("");
+}
+
+function sendAllSMS() {
+  const hot = deals.sort((a,b)=>aiScore(b)-aiScore(a)).slice(0,5);
+  if (!hot.length) return alert("No deals loaded");
+  window.location.href = smsLink(hot[0]);
+}
+
 function uploadCSV() {
   const file = document.getElementById("csvFile").files[0];
   if (!file) return alert("Upload a CSV first");
 
   const reader = new FileReader();
-
   reader.onload = function(e) {
     const rows = parseCSV(e.target.result.trim());
 
@@ -160,28 +167,26 @@ function uploadCSV() {
       estimated_dscr: Number(d.estimated_dscr || 0),
       seller_finance_probability: d.seller_finance_probability || "",
       distress_type: d.distress_type || d.notes || "",
-      contact_name: d.contact_name || "",
       contact_phone: d.contact_phone || d.phone || "",
-      contact_email: d.contact_email || d.email || "",
       brrrr_section8_score: Number(d.brrrr_section8_score || d.ai_score || 50)
     }));
 
     updateStats(new Date().toISOString());
     render(deals);
     alerts(deals);
+    activity(deals);
+    lenderBoard(deals);
   };
-
   reader.readAsText(file);
 }
 
 function parseCSV(text) {
   const lines = text.split(/\r?\n/).filter(Boolean);
   const headers = lines.shift().split(",").map(h => h.trim());
-
   return lines.map(line => {
     const values = line.split(",");
     const obj = {};
-    headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : "");
+    headers.forEach((h,i) => obj[h] = values[i] ? values[i].trim() : "");
     return obj;
   });
 }
