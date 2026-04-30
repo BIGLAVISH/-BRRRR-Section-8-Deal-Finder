@@ -1,1 +1,41 @@
-:root{--bg:#070b14;--panel:#101827;--text:#ecf4ff;--muted:#8ea3c2;--line:#263550;--green:#45f0a5;--blue:#4bb5ff;--red:#ff5470}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#14213e,#070b14 45%);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--text)}main{padding:24px;max-width:1320px;margin:auto}header{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}h1{margin:0;font-size:34px;line-height:1.05}p{color:var(--muted);margin:8px 0 0}.btn{background:linear-gradient(135deg,var(--green),var(--blue));color:#06101d;text-decoration:none;font-weight:900;padding:13px 18px;border-radius:14px;white-space:nowrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.stats div,.panel{background:rgba(16,24,39,.92);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 18px 70px rgba(0,0,0,.28)}.stats span{display:block;color:var(--muted);font-size:13px}.stats b{font-size:32px;color:var(--green)}input{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#070d18;color:var(--text);font-size:16px;margin-bottom:14px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:1180px;background:#080f1d}th,td{padding:12px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;vertical-align:top}th{background:#101827;color:#c9d8f0;position:sticky;top:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:rgba(69,240,165,.12);color:var(--green);font-weight:800}.low{color:var(--muted)}.bad{color:var(--red)}@media(max-width:760px){main{padding:14px}header{display:block}.btn{display:inline-block;margin-top:14px}.stats{grid-template-columns:1fr}h1{font-size:25px}}
+body {
+  background:#070b14;
+  color:white;
+  font-family:sans-serif;
+  padding:10px;
+}
+
+h1 { font-size:24px }
+
+.panel {
+  background:#111827;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:8px;
+  border:none;
+}
+
+button {
+  background:#22c55e;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  color:black;
+  font-weight:bold;
+}
+
+table {
+  width:100%;
+  font-size:12px;
+}
+
+td {
+  padding:6px;
+}
