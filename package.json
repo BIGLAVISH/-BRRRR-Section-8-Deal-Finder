@@ -1,0 +1,12 @@
+{
+  "name": "bca-brrrr-section8-clean-deal-finder",
+  "version": "2.0.0",
+  "description": "Dependency-free GitHub Actions + Netlify daily BRRRR and Section 8 deal finder.",
+  "main": "daily-pull.js",
+  "scripts": {
+    "start": "node daily-pull.js",
+    "scrape": "node daily-pull.js",
+    "test": "node smoke-test.js"
+  },
+  "license": "MIT"
+}
