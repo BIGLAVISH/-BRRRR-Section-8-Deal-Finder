@@ -1,16 +1,16 @@
 {
   "sources": [
     {
-      "name": "Your Live CSV Feed",
-      "type": "csv_url",
-      "url": "PASTE_REAL_CSV_URL_HERE",
-      "enabled": false
-    },
-    {
       "name": "Manual Upload CSV",
       "type": "local_csv",
       "path": "data/sample_source.csv",
       "enabled": true
+    },
+    {
+      "name": "Live Real Deal CSV Feed",
+      "type": "csv_url",
+      "url": "PASTE_REAL_CSV_URL_HERE",
+      "enabled": false
     }
   ]
 }
