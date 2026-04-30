@@ -6,114 +6,196 @@
   <title>BCA Deal Machine V3</title>
   <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
-<div class="app-shell">
 
+<body>
+<div class="dashboard">
+
+  <!-- LEFT SIDEBAR -->
   <aside class="sidebar">
-    <div class="brand">
-      <img src="assets/lavish-gemz-bg.jpg"/>
-      <h2>BCA DEAL MACHINE</h2>
-      <p>Hustle • Opportunity • Legacy</p>
+    <div class="logo-block">
+      <img src="assets/lavish-gemz-bg.jpg" alt="Lavish Gemz"/>
     </div>
 
-    <nav>
+    <nav class="menu">
       <a class="active">🏠 Dashboard</a>
       <a>📊 Deals Pipeline</a>
-      <a>🚨 Deal Alerts</a>
+      <a>🚨 Deal Alerts <b>12</b></a>
+      <a>➕ Create New Deal</a>
       <a>💰 Funding Calculator</a>
       <a>⬆️ CSV Upload</a>
-      <a>📞 Seller Calls</a>
-      <a>🏦 Lender Match</a>
+      <a>🤖 AI Deal Finder</a>
+      <a>📞 Skip Tracing</a>
+      <a>📅 Calendar</a>
+      <a>✉️ Messages <b>5</b></a>
+      <a>📁 Reports</a>
       <a>⚙️ Settings</a>
+      <a>❓ Help & Support</a>
     </nav>
 
-    <div class="side-card">
-      <b>HUSTLE TODAY</b>
-      <span>Find what others overlook.</span>
+    <div class="hustle-card">
+      <span>HUSTLE TODAY</span>
+      <h3>FUND LEGENDARY</h3>
+      <small>♛</small>
+    </div>
+
+    <div class="admin-card">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Admin User</strong>
+        <small>admin@bcadeals.com</small>
+      </div>
     </div>
   </aside>
 
-  <main>
-    <header class="topbar">
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- TOP HERO -->
+    <header class="hero">
       <div>
-        <h1>BCA Deal Machine V3</h1>
-        <p>Finding what others overlook. Turning it into legacy.</p>
+        <h1>BCA DEAL MACHINE V3</h1>
+        <p>FINDING WHAT OTHERS OVERLOOK. TURNING IT INTO LEGACY.</p>
       </div>
 
-      <input id="search" placeholder="Search deals, address, city, zip..."/>
+      <div class="top-actions">
+        <input id="search" placeholder="Search deals, address, city, zip..."/>
+        <div class="admin-top">
+          <span>🔔</span>
+          <div class="avatar small">A</div>
+          <div>
+            <strong>Admin User</strong>
+            <small>Super Admin</small>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <section class="stats">
-      <div><span>Total Deals</span><b id="count">0</b><small>↑ live pipeline</small></div>
-      <div><span>Call First</span><b id="callFirst">0</b><small>↑ priority leads</small></div>
-      <div><span>Hot Alerts</span><b id="alertCount">0</b><small>↑ best deals</small></div>
-      <div><span>Updated</span><b id="updated">-</b><small>auto refresh</small></div>
+    <!-- KPI CARDS -->
+    <section class="kpis">
+      <div class="kpi"><i>👥</i><span>TOTAL DEALS</span><b id="count">0</b><small>↑ live pipeline</small></div>
+      <div class="kpi"><i>🗂️</i><span>CALL FIRST</span><b id="callFirst">0</b><small>↑ priority leads</small></div>
+      <div class="kpi"><i>🔥</i><span>HOT ALERTS</span><b id="alertCount">0</b><small>↑ best deals</small></div>
+      <div class="kpi"><i>💵</i><span>TOTAL EQUITY</span><b id="totalEquity">$0</b><small>↑ estimated</small></div>
+      <div class="kpi"><i>📈</i><span>AVG DSCR</span><b id="avgDscr">0.00</b><small>↑ underwriting</small></div>
     </section>
 
-    <section class="grid">
-      <div class="panel">
+    <!-- CONTENT GRID -->
+    <section class="content-grid">
+
+      <div class="panel deal-alerts">
         <div class="panel-head">
-          <h2>🚨 Deal Alerts</h2>
-          <button onclick="sendAllSMS()">Send SMS to All</button>
+          <h2>🚨 DEAL ALERTS</h2>
+          <button>View All</button>
         </div>
         <div id="alerts"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>📈 Pipeline Overview</h2>
-          <span>This Week</span>
-        </div>
-        <div class="chart">
-          <div style="height:35%"></div>
-          <div style="height:55%"></div>
-          <div style="height:45%"></div>
-          <div style="height:70%"></div>
-          <div style="height:60%"></div>
-          <div style="height:90%"></div>
-          <div style="height:50%"></div>
+        <div class="button-row">
+          <button onclick="sendAllSMS()" class="green">Send SMS to All</button>
+          <button class="gold">Call Top Sellers</button>
         </div>
       </div>
 
-      <div class="panel">
+      <div class="panel pipeline">
         <div class="panel-head">
-          <h2>🧾 Recent Activity</h2>
+          <h2>PIPELINE OVERVIEW</h2>
+          <button>This Week</button>
+        </div>
+        <div class="legend">
+          <span class="dot gold-dot"></span> New Deals
+          <span class="dot gray-dot"></span> Call First
+          <span class="dot green-dot"></span> Closed
+        </div>
+        <div class="bar-chart">
+          <div style="--h:35%"></div>
+          <div style="--h:42%"></div>
+          <div style="--h:58%"></div>
+          <div style="--h:45%"></div>
+          <div style="--h:76%"></div>
+          <div style="--h:100%"></div>
+          <div style="--h:55%"></div>
+        </div>
+      </div>
+
+      <div class="panel activity">
+        <div class="panel-head">
+          <h2>RECENT ACTIVITY</h2>
+          <button>View All</button>
         </div>
         <ul id="activity"></ul>
       </div>
 
-      <div class="panel">
-        <h2>⬆️ Upload Deals CSV</h2>
-        <input type="file" id="csvFile" accept=".csv"/>
-        <button onclick="uploadCSV()">Upload Deals</button>
-        <a class="btn" href="data/deals.csv" download>Download CSV</a>
+      <div class="panel donut-panel">
+        <div class="donut">
+          <b id="donutTotal">0</b>
+          <span>TOTAL</span>
+        </div>
+        <div class="donut-list">
+          <p><span></span> Direct Mail <b>35%</b></p>
+          <p><span></span> Wholesaler <b>25%</b></p>
+          <p><span></span> Foreclosure <b>20%</b></p>
+          <p><span></span> MLS <b>10%</b></p>
+          <p><span></span> Other <b>10%</b></p>
+        </div>
       </div>
 
-      <div class="panel">
-        <h2>🏦 Top Lender Matches</h2>
+      <div class="panel lenders">
+        <h2>TOP LENDERS</h2>
         <div id="lenders"></div>
       </div>
 
-      <div class="panel">
-        <h2>💰 Funding Calculator</h2>
+      <div class="panel calc-panel">
+        <h2>FUNDING CALCULATOR</h2>
         <input id="purchase" placeholder="Purchase Price"/>
-        <input id="rehab" placeholder="Rehab Budget"/>
+        <input id="rehab" placeholder="Rehab"/>
         <input id="arv" placeholder="ARV"/>
-        <input id="rent" placeholder="Monthly Rent"/>
-        <button onclick="calc()">Calculate</button>
+        <input id="rent" placeholder="Rent (Monthly)"/>
+        <button onclick="calc()" class="gold full-btn">Calculate</button>
         <pre id="result"></pre>
       </div>
+
     </section>
 
-    <section class="panel full">
-      <h2>📊 Deal Pipeline</h2>
+    <!-- CSV + TABLE -->
+    <section class="panel full-table">
+      <div class="panel-head">
+        <h2>📊 DEAL PIPELINE</h2>
+        <div>
+          <input type="file" id="csvFile" accept=".csv"/>
+          <button onclick="uploadCSV()">Upload CSV</button>
+          <a class="download" href="data/deals.csv" download>Download CSV</a>
+        </div>
+      </div>
       <div class="table-wrap">
         <table id="deals"></table>
       </div>
     </section>
+
   </main>
 
+  <!-- PHONE MOCKUP RIGHT SIDE -->
+  <aside class="phone-preview">
+    <div class="phone">
+      <div class="phone-top">9:41</div>
+      <h3>Lavish Gemz</h3>
+      <p>Welcome back, Admin! ♛</p>
+
+      <div class="phone-kpis">
+        <div><span>Total Deals</span><b id="phoneCount">0</b></div>
+        <div><span>Call First</span><b id="phoneCall">0</b></div>
+        <div><span>Hot Alerts</span><b id="phoneAlerts">0</b></div>
+        <div><span>Total Equity</span><b id="phoneEquity">$0</b></div>
+      </div>
+
+      <h4>DEAL ALERTS</h4>
+      <div id="phoneAlertsList"></div>
+
+      <div class="phone-nav">
+        <span>🏠</span><span>📊</span><span>🚨</span><span>💰</span><span>⋯</span>
+      </div>
+    </div>
+  </aside>
+
 </div>
+
 <script src="app.js"></script>
 </body>
 </html>
