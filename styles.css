@@ -1,59 +1,137 @@
 body {
-  background:#070b14;
-  color:white;
-  font-family:sans-serif;
-  padding:10px;
+  background: #070b14;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 18px;
+  margin: 0;
 }
 
-h1 { font-size:24px }
+main {
+  max-width: 1100px;
+  margin: auto;
+}
 
-.panel {
-  background:#111827;
-  padding:10px;
-  margin:10px 0;
-  border-radius:10px;
+h1 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+header {
+  margin-bottom: 22px;
+}
+
+.btn,
+button {
+  display: inline-block;
+  background: #22c55e;
+  color: #000;
+  padding: 12px 18px;
+  margin: 8px 5px 8px 0;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-box {
+  margin-top: 15px;
+  background: #111827;
+  padding: 12px;
+  border-radius: 12px;
 }
 
 input {
-  width:100%;
-  padding:10px;
-  margin:5px 0;
-  border-radius:8px;
-  border:none;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
 }
 
-button {
-  background:#22c55e;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  color:black;
-  font-weight:bold;
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stats div {
+  background: #111827;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.stats span {
+  display: block;
+  color: #94a3b8;
+}
+
+.stats b {
+  font-size: 30px;
+  color: #22c55e;
+}
+
+.panel {
+  background: #111827;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 14px;
+}
+
+.deal-card {
+  background: #020617;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 14px;
+  border: 2px solid #22c55e;
+  font-size: 18px;
+}
+
+.table-wrap {
+  overflow-x: auto;
 }
 
 table {
-  width:100%;
-  font-size:12px;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
 }
 
+th,
 td {
-  padding:6px;
-}
-.deal-card {
-  background:#020617;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-  border:1px solid #22c55e;
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+  text-align: left;
 }
 
-a.btn {
-  display:inline-block;
-  background:#22c55e;
-  color:#000;
-  padding:8px;
-  margin:4px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
+th {
+  color: #22c55e;
+}
+
+pre {
+  background: #020617;
+  padding: 12px;
+  border-radius: 10px;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 700px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .deal-card {
+    font-size: 16px;
+  }
 }
