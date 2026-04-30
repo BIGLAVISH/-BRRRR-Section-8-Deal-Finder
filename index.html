@@ -7,50 +7,113 @@
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-<main>
-  <header>
-    <h1>BCA Deal Machine V3</h1>
-    <p>BRRRR • Seller Finance • Distressed • Creative Finance • Deal Alerts</p>
+<div class="app-shell">
 
-    <a class="btn" href="data/deals.csv" download>Download CSV</a>
-
-    <div class="upload-box">
-      <input type="file" id="csvFile" accept=".csv"/>
-      <button onclick="uploadCSV()">Upload Deals CSV</button>
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/lavish-gemz-bg.jpg"/>
+      <h2>BCA DEAL MACHINE</h2>
+      <p>Hustle • Opportunity • Legacy</p>
     </div>
-  </header>
 
-  <section class="stats">
-    <div><span>Total Deals</span><b id="count">0</b></div>
-    <div><span>Call First</span><b id="callFirst">0</b></div>
-    <div><span>Alerts</span><b id="alertCount">0</b></div>
-    <div><span>Updated</span><b id="updated">-</b></div>
-  </section>
+    <nav>
+      <a class="active">🏠 Dashboard</a>
+      <a>📊 Deals Pipeline</a>
+      <a>🚨 Deal Alerts</a>
+      <a>💰 Funding Calculator</a>
+      <a>⬆️ CSV Upload</a>
+      <a>📞 Seller Calls</a>
+      <a>🏦 Lender Match</a>
+      <a>⚙️ Settings</a>
+    </nav>
 
-  <section class="panel">
-    <h2>🚨 Deal Alerts</h2>
-    <div id="alerts"></div>
-  </section>
-
-  <section class="panel">
-    <h2>💰 Funding Calculator</h2>
-    <input id="purchase" placeholder="Purchase Price"/>
-    <input id="rehab" placeholder="Rehab Budget"/>
-    <input id="arv" placeholder="ARV"/>
-    <input id="rent" placeholder="Monthly Rent"/>
-    <button onclick="calc()">Calculate</button>
-    <pre id="result"></pre>
-  </section>
-
-  <section class="panel">
-    <h2>📊 Deal Pipeline</h2>
-    <input id="search" placeholder="Search deals..."/>
-    <div class="table-wrap">
-      <table id="deals"></table>
+    <div class="side-card">
+      <b>HUSTLE TODAY</b>
+      <span>Find what others overlook.</span>
     </div>
-  </section>
-</main>
+  </aside>
 
+  <main>
+    <header class="topbar">
+      <div>
+        <h1>BCA Deal Machine V3</h1>
+        <p>Finding what others overlook. Turning it into legacy.</p>
+      </div>
+
+      <input id="search" placeholder="Search deals, address, city, zip..."/>
+    </header>
+
+    <section class="stats">
+      <div><span>Total Deals</span><b id="count">0</b><small>↑ live pipeline</small></div>
+      <div><span>Call First</span><b id="callFirst">0</b><small>↑ priority leads</small></div>
+      <div><span>Hot Alerts</span><b id="alertCount">0</b><small>↑ best deals</small></div>
+      <div><span>Updated</span><b id="updated">-</b><small>auto refresh</small></div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>🚨 Deal Alerts</h2>
+          <button onclick="sendAllSMS()">Send SMS to All</button>
+        </div>
+        <div id="alerts"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>📈 Pipeline Overview</h2>
+          <span>This Week</span>
+        </div>
+        <div class="chart">
+          <div style="height:35%"></div>
+          <div style="height:55%"></div>
+          <div style="height:45%"></div>
+          <div style="height:70%"></div>
+          <div style="height:60%"></div>
+          <div style="height:90%"></div>
+          <div style="height:50%"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>🧾 Recent Activity</h2>
+        </div>
+        <ul id="activity"></ul>
+      </div>
+
+      <div class="panel">
+        <h2>⬆️ Upload Deals CSV</h2>
+        <input type="file" id="csvFile" accept=".csv"/>
+        <button onclick="uploadCSV()">Upload Deals</button>
+        <a class="btn" href="data/deals.csv" download>Download CSV</a>
+      </div>
+
+      <div class="panel">
+        <h2>🏦 Top Lender Matches</h2>
+        <div id="lenders"></div>
+      </div>
+
+      <div class="panel">
+        <h2>💰 Funding Calculator</h2>
+        <input id="purchase" placeholder="Purchase Price"/>
+        <input id="rehab" placeholder="Rehab Budget"/>
+        <input id="arv" placeholder="ARV"/>
+        <input id="rent" placeholder="Monthly Rent"/>
+        <button onclick="calc()">Calculate</button>
+        <pre id="result"></pre>
+      </div>
+    </section>
+
+    <section class="panel full">
+      <h2>📊 Deal Pipeline</h2>
+      <div class="table-wrap">
+        <table id="deals"></table>
+      </div>
+    </section>
+  </main>
+
+</div>
 <script src="app.js"></script>
 </body>
 </html>
