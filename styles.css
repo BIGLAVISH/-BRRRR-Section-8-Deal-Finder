@@ -1,137 +1,324 @@
+:root {
+  --gold:#c9952e;
+  --green:#22c55e;
+  --red:#ef4444;
+  --dark:#050505;
+  --panel:rgba(12,12,12,.86);
+  --line:rgba(201,149,46,.35);
+}
+
+* {
+  box-sizing:border-box;
+}
+
 body {
-  background: #070b14;
-  color: white;
-  font-family: Arial, sans-serif;
-  padding: 18px;
-  margin: 0;
+  margin:0;
+  color:white;
+  font-family:Arial, sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.86)),
+    url("assets/lavish-gemz-bg.jpg") center/cover fixed no-repeat;
+}
+
+.app-shell {
+  display:grid;
+  grid-template-columns:270px 1fr;
+  min-height:100vh;
+}
+
+.sidebar {
+  background:rgba(0,0,0,.88);
+  border-right:1px solid var(--line);
+  padding:18px;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+
+.brand img {
+  width:100%;
+  border-radius:14px;
+  border:1px solid var(--line);
+}
+
+.brand h2 {
+  color:var(--gold);
+  margin:14px 0 4px;
+}
+
+.brand p {
+  color:#ddd;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+nav {
+  margin-top:20px;
+}
+
+nav a {
+  display:block;
+  padding:13px;
+  margin:7px 0;
+  border-radius:10px;
+  color:white;
+  text-decoration:none;
+}
+
+nav a.active,
+nav a:hover {
+  background:linear-gradient(135deg,#4a3105,var(--gold));
+}
+
+.side-card {
+  margin-top:25px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  text-align:center;
+  background:rgba(201,149,46,.08);
+}
+
+.side-card b {
+  color:var(--gold);
+  display:block;
+}
+
+.side-card span {
+  display:block;
+  margin-top:8px;
+  color:#ddd;
 }
 
 main {
-  max-width: 1100px;
-  margin: auto;
+  padding:22px;
+}
+
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+  margin-bottom:22px;
 }
 
 h1 {
-  font-size: 34px;
-  margin-bottom: 8px;
+  margin:0;
+  font-size:48px;
+  color:white;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  text-shadow:0 0 20px rgba(201,149,46,.45);
+}
+
+h2 {
+  margin-top:0;
 }
 
 p {
-  font-size: 18px;
-  color: #cbd5e1;
+  color:#ddd;
 }
 
-header {
-  margin-bottom: 22px;
-}
-
-.btn,
-button {
-  display: inline-block;
-  background: #22c55e;
-  color: #000;
-  padding: 12px 18px;
-  margin: 8px 5px 8px 0;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-.upload-box {
-  margin-top: 15px;
-  background: #111827;
-  padding: 12px;
-  border-radius: 12px;
+.topbar input {
+  max-width:360px;
 }
 
 input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
+  width:100%;
+  padding:13px;
+  background:rgba(0,0,0,.75);
+  border:1px solid var(--line);
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  margin:6px 0;
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:18px;
 }
 
-.stats div {
-  background: #111827;
-  padding: 14px;
-  border-radius: 12px;
+.stats div,
+.panel {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 20px 70px rgba(0,0,0,.35);
 }
 
 .stats span {
-  display: block;
-  color: #94a3b8;
+  font-size:12px;
+  color:#ddd;
+  text-transform:uppercase;
 }
 
 .stats b {
-  font-size: 30px;
-  color: #22c55e;
+  display:block;
+  font-size:34px;
+  color:white;
+  margin:8px 0;
 }
 
-.panel {
-  background: #111827;
-  padding: 16px;
-  margin: 16px 0;
-  border-radius: 14px;
+.stats small {
+  color:var(--green);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr;
+  gap:16px;
+}
+
+.full {
+  margin-top:16px;
+}
+
+.panel-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+button,
+.btn,
+.mini {
+  display:inline-block;
+  background:linear-gradient(135deg,#3b2a05,var(--gold));
+  color:white;
+  padding:11px 15px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.green {
+  background:linear-gradient(135deg,#063d1d,var(--green));
+}
+
+.gold {
+  background:linear-gradient(135deg,#3b2a05,var(--gold));
 }
 
 .deal-card {
-  background: #020617;
-  padding: 16px;
-  margin: 12px 0;
-  border-radius: 14px;
-  border: 2px solid #22c55e;
-  font-size: 18px;
+  display:flex;
+  gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px 0;
+}
+
+.deal-card b {
+  font-size:18px;
+}
+
+.deal-card p {
+  margin:4px 0;
+}
+
+.deal-card span {
+  display:inline-block;
+  color:white;
+  background:#14532d;
+  padding:4px 8px;
+  border-radius:6px;
+  margin:6px 0;
+  font-size:12px;
+}
+
+.thumb {
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  background:rgba(201,149,46,.15);
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:30px;
+}
+
+.chart {
+  height:250px;
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  border-bottom:1px solid var(--line);
+  padding-top:30px;
+}
+
+.chart div {
+  flex:1;
+  background:linear-gradient(var(--gold),#3b2a05);
+  border-radius:5px 5px 0 0;
+}
+
+ul {
+  padding-left:18px;
+}
+
+li {
+  margin-bottom:14px;
+}
+
+.lender {
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:10px 0;
 }
 
 .table-wrap {
-  overflow-x: auto;
+  overflow-x:auto;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 1000px;
+  width:100%;
+  min-width:1100px;
+  border-collapse:collapse;
 }
 
-th,
-td {
-  padding: 10px;
-  border-bottom: 1px solid #334155;
-  text-align: left;
+th, td {
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  text-align:left;
 }
 
 th {
-  color: #22c55e;
+  color:var(--gold);
 }
 
 pre {
-  background: #020617;
-  padding: 12px;
-  border-radius: 10px;
-  white-space: pre-wrap;
+  background:rgba(0,0,0,.7);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  white-space:pre-wrap;
 }
 
-@media (max-width: 700px) {
+@media(max-width:900px) {
+  .app-shell {
+    display:block;
+  }
+
+  .sidebar {
+    position:relative;
+    height:auto;
+  }
+
+  .grid,
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
+  }
+
+  .topbar {
+    display:block;
   }
 
   h1 {
-    font-size: 28px;
-  }
-
-  .deal-card {
-    font-size: 16px;
+    font-size:34px;
   }
 }
