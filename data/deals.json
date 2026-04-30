@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-30T09:39:38.501Z",
+  "updated_at": "2026-04-30T14:03:22.399Z",
   "count": 5,
   "deals": [
     {
@@ -30,7 +30,7 @@
       "estimated_refi_loan_75_ltv": 712500,
       "estimated_dscr": 1.62,
       "mao_70_rule": 530000,
-      "updated_at": "2026-04-30T09:39:38.495Z"
+      "updated_at": "2026-04-30T14:03:22.398Z"
     },
     {
       "recommendation": "CALL FIRST",
@@ -60,7 +60,7 @@
       "estimated_refi_loan_75_ltv": 1425000,
       "estimated_dscr": 1.67,
       "mao_70_rule": 1055000,
-      "updated_at": "2026-04-30T09:39:38.501Z"
+      "updated_at": "2026-04-30T14:03:22.399Z"
     },
     {
       "recommendation": "CALL FIRST",
@@ -90,7 +90,7 @@
       "estimated_refi_loan_75_ltv": 390000,
       "estimated_dscr": 1.87,
       "mao_70_rule": 279000,
-      "updated_at": "2026-04-30T09:39:38.501Z"
+      "updated_at": "2026-04-30T14:03:22.399Z"
     },
     {
       "recommendation": "CALL FIRST",
@@ -120,7 +120,7 @@
       "estimated_refi_loan_75_ltv": 1012500,
       "estimated_dscr": 1.68,
       "mao_70_rule": 750000,
-      "updated_at": "2026-04-30T09:39:38.501Z"
+      "updated_at": "2026-04-30T14:03:22.399Z"
     },
     {
       "recommendation": "REVIEW",
@@ -150,7 +150,7 @@
       "estimated_refi_loan_75_ltv": 292500,
       "estimated_dscr": 1.59,
       "mao_70_rule": 203000,
-      "updated_at": "2026-04-30T09:39:38.501Z"
+      "updated_at": "2026-04-30T14:03:22.399Z"
     }
   ]
 }
