@@ -1,0 +1,30 @@
+name: Daily BRRRR Deal Finder
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run scraper
+        run: node daily-pull.js
+
+      - name: Commit updated deals
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data/*
+          git commit -m "Auto update deals" || echo "No changes"
+          git push
