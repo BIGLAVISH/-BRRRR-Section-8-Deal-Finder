@@ -1,0 +1,10 @@
+{
+  "sources": [
+    {
+      "name": "Sample Atlanta + Bibb County Feed",
+      "type": "local_csv",
+      "path": "data/sample_source.csv",
+      "enabled": true
+    }
+  ]
+}

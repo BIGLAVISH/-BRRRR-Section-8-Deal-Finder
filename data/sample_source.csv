@@ -1,0 +1,6 @@
+address,city,county,state,units,asking_price,est_arv,est_rehab,market_rent_per_unit,section8_rent_per_unit,seller_finance_probability,source_url,contact_name,contact_phone,contact_email
+1840 Demo Ave,Atlanta,Fulton,GA,8,620000,950000,120000,1150,1450,High,https://example.com/demo-1,Demo Seller,404-555-0199,seller@example.com
+412 Equity Rd,Macon,Bibb,GA,6,310000,520000,70000,875,1225,Medium,https://example.com/demo-2,Bibb Owner,478-555-0132,owner@example.com
+77 Rehab Lane,Atlanta,DeKalb,GA,16,1250000,1900000,260000,1100,1500,High,https://example.com/demo-3,Broker Lead,404-555-0144,broker@example.com
+900 Cashflow Ct,Macon,Bibb,GA,4,225000,390000,55000,825,1175,Low,https://example.com/demo-4,Owner Lead,478-555-0191,lead@example.com
+200 Section 8 Way,Atlanta,Clayton,GA,12,880000,1350000,180000,1000,1425,Medium,https://example.com/demo-5,Clayton Seller,770-555-0166,clayton@example.com
