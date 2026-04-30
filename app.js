@@ -17,6 +17,32 @@ async function loadDeals() {
   }
 }
 
+function lenderMatch(d) {
+  const score = Number(d.brrrr_section8_score || 0);
+  const units = Number(d.units || 0);
+  const equity = Number(d.created_equity || 0);
+
+  if (score >= 65 && equity >= 100000) return "Private lender / BRRRR lender";
+  if (units >= 5) return "DSCR multifamily lender";
+  if (d.seller_finance_probability === "High") return "Seller finance + gap lender";
+  return "Hard money lender";
+}
+
+function smsLink(d) {
+  const body =
+`HOT DEAL ALERT
+Address: ${d.address}
+City: ${d.city}
+Units: ${d.units}
+Score: ${d.brrrr_section8_score}
+Ask: $${d.asking_price}
+ARV: $${d.est_arv}
+Equity: $${d.created_equity}
+Lender Match: ${lenderMatch(d)}`;
+
+  return `sms:?&body=${encodeURIComponent(body)}`;
+}
+
 function alerts(rows) {
   const hot = rows.filter(d =>
     d.recommendation === "CALL FIRST" ||
@@ -27,7 +53,13 @@ function alerts(rows) {
 
   document.getElementById("alerts").innerHTML =
     hot.map(d =>
-      `<div>🔥 ${d.address} | Score ${d.brrrr_section8_score}</div>`
+      `<div class="deal-card">
+        🔥 <b>${d.address}</b><br>
+        Score: ${d.brrrr_section8_score}<br>
+        Lender: ${lenderMatch(d)}<br><br>
+        <a class="btn" href="${smsLink(d)}">Send SMS Alert</a>
+        <a class="btn" href="tel:${d.contact_phone || ''}">Call Seller</a>
+      </div>`
     ).join("");
 }
 
@@ -40,6 +72,9 @@ function render(rows) {
         <td>${d.city}</td>
         <td>${d.units}</td>
         <td>$${d.asking_price}</td>
+        <td>${lenderMatch(d)}</td>
+        <td><a href="tel:${d.contact_phone || ''}">Call</a></td>
+        <td><a href="${smsLink(d)}">SMS</a></td>
       </tr>
     `).join("");
 }
