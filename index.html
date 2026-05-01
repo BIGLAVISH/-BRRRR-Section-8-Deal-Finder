@@ -1,88 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BCA Deal Machine V3</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-
 <body>
-  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
-  <div class="dashboard">
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <img src="assets/lavish-gemz-bg.jpg" alt="Lavish Gemz">
+    <h1>BCA Deal Machine V3</h1>
+    <p>Admin Login</p>
+    <input id="loginUser" placeholder="Username" value="admin">
+    <input id="loginPass" placeholder="Password" type="password" value="admin123">
+    <button onclick="login()">Login</button>
+    <small>Demo login: admin / admin123</small>
+  </div>
+</div>
 
-    <aside class="sidebar">
-      <div class="brand">
-        <img src="assets/lavish-gemz-bg.jpg" alt="Lavish Gemz" />
-        <h2>BCA DEAL MACHINE</h2>
-        <p>Hustle • Opportunity • Legacy</p>
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="dashboard" id="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/lavish-gemz-bg.jpg" alt="Lavish Gemz">
+    </div>
+
+    <nav>
+      <button onclick="showSection('dashboardSection')">🏠 Dashboard</button>
+      <button onclick="showSection('pipelineSection')">📊 Deals Pipeline</button>
+      <button onclick="showSection('alertsSection')">🚨 Deal Alerts <span id="navAlertCount">0</span></button>
+      <button onclick="showSection('createSection')">📂 Create New Deal</button>
+      <button onclick="showSection('calculatorSection')">💰 Funding Calculator</button>
+      <button onclick="showSection('uploadSection')">⬆️ CSV Upload</button>
+      <button onclick="showSection('aiSection')">🤖 AI Deal Finder</button>
+      <button onclick="showSection('skipSection')">📞 Skip Tracing</button>
+      <button onclick="showSection('calendarSection')">📅 Calendar</button>
+      <button onclick="showSection('messagesSection')">✉️ Messages <span>5</span></button>
+      <button onclick="showSection('reportsSection')">📁 Reports</button>
+      <button onclick="showSection('settingsSection')">⚙️ Settings</button>
+      <button onclick="showSection('helpSection')">❓ Help & Support</button>
+    </nav>
+
+    <div class="hustle-card">
+      <span>HUSTLE TODAY</span>
+      <b>FUND LEGENDARY</b>
+      <strong>♛</strong>
+    </div>
+
+    <div class="admin-card">
+      <div class="avatar">A</div>
+      <div>
+        <b>Admin User</b>
+        <small>admin@bcadeals.com</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="hero">
+      <div>
+        <h1>BCA Deal Machine V3</h1>
+        <p>Finding what others overlook. Turning it into legacy.</p>
+      </div>
+      <input id="search" placeholder="Search deals, address, city, zip..." oninput="searchDeals()">
+    </header>
+
+    <section id="dashboardSection" class="section active-section">
+      <div class="kpis">
+        <div class="kpi"><i>👥</i><span>Total Deals</span><b id="totalDeals">0</b><small>↑ live pipeline</small></div>
+        <div class="kpi"><i>🗂️</i><span>Call First</span><b id="callFirst">0</b><small>↑ priority leads</small></div>
+        <div class="kpi"><i>🔥</i><span>Hot Alerts</span><b id="alertsCount">0</b><small>↑ best deals</small></div>
+        <div class="kpi"><i>💵</i><span>Total Equity</span><b id="totalEquity">$0</b><small>estimated</small></div>
+        <div class="kpi"><i>📈</i><span>Avg DSCR</span><b id="avgDscr">0.00</b><small>underwriting</small></div>
       </div>
 
-      <nav>
-        <button onclick="showSection('dashboardSection')">🏠 Dashboard</button>
-        <button onclick="showSection('alertsSection')">🚨 Deal Alerts</button>
-        <button onclick="showSection('calculatorSection')">💰 Funding Calculator</button>
-        <button onclick="showSection('uploadSection')">⬆️ CSV Upload</button>
-        <button onclick="showSection('pipelineSection')">📊 Deal Pipeline</button>
-        <button onclick="downloadCSV()">⬇️ Download CSV</button>
-      </nav>
-    </aside>
-
-    <main class="main">
-
-      <section id="dashboardSection">
-        <header class="hero">
-          <h1>BCA Deal Machine V3</h1>
-          <p>Finding what others overlook. Turning it into legacy.</p>
-          <input id="search" placeholder="Search deals..." oninput="searchDeals()" />
-        </header>
-
-        <div class="stats">
-          <div class="card"><span>Total Deals</span><b id="totalDeals">0</b></div>
-          <div class="card"><span>Call First</span><b id="callFirst">0</b></div>
-          <div class="card"><span>Hot Alerts</span><b id="alertsCount">0</b></div>
-          <div class="card"><span>Total Equity</span><b id="totalEquity">$0</b></div>
-        </div>
-      </section>
-
-      <section id="alertsSection" class="panel">
-        <div class="panel-head">
-          <h2>🚨 Deal Alerts</h2>
-          <div>
-            <button onclick="sendTopSMS()">Send Top SMS</button>
-            <button onclick="callTopSeller()">Call Top Seller</button>
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-head"><h2>🚨 Deal Alerts</h2><button onclick="showSection('alertsSection')">View All</button></div>
+          <div id="alerts"></div>
+          <div class="button-row">
+            <button class="green" onclick="sendTopSMS()">Send SMS to All</button>
+            <button class="gold" onclick="callTopSeller()">Call Top Sellers</button>
           </div>
         </div>
-        <div id="alerts"></div>
-      </section>
 
-      <section id="calculatorSection" class="panel">
-        <h2>💰 Funding Calculator</h2>
-        <input id="purchase" type="number" placeholder="Purchase Price">
-        <input id="rehab" type="number" placeholder="Rehab Budget">
-        <input id="arv" type="number" placeholder="After Repair Value">
-        <input id="rent" type="number" placeholder="Monthly Rent">
-        <button onclick="calc()">Calculate</button>
-        <pre id="result"></pre>
-      </section>
-
-      <section id="uploadSection" class="panel">
-        <h2>⬆️ Upload Deals CSV</h2>
-        <input type="file" id="csvFile" accept=".csv"/>
-        <button onclick="uploadCSV()">Upload CSV</button>
-        <button onclick="downloadCSV()">Download Current CSV</button>
-      </section>
-
-      <section id="pipelineSection" class="panel">
-        <h2>📊 Deal Pipeline</h2>
-        <div class="table-wrap">
-          <table id="deals"></table>
+        <div class="panel">
+          <div class="panel-head"><h2>Pipeline Overview</h2><button>This Week</button></div>
+          <div class="legend"><span class="dot gold-dot"></span> New Deals <span class="dot gray-dot"></span> Call First <span class="dot green-dot"></span> Closed</div>
+          <div class="bar-chart">
+            <div style="--h:35%"></div><div style="--h:42%"></div><div style="--h:58%"></div>
+            <div style="--h:45%"></div><div style="--h:76%"></div><div style="--h:100%"></div><div style="--h:55%"></div>
+          </div>
         </div>
-      </section>
 
-    </main>
-  </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Recent Activity</h2><button>View All</button></div>
+          <ul id="activity"></ul>
+        </div>
+
+        <div class="panel donut-panel">
+          <div class="donut"><b id="donutTotal">0</b><span>TOTAL</span></div>
+          <div class="donut-list">
+            <p><span></span> Direct Mail <b>35%</b></p>
+            <p><span></span> Wholesaler <b>25%</b></p>
+            <p><span></span> Foreclosure <b>20%</b></p>
+            <p><span></span> MLS <b>10%</b></p>
+            <p><span></span> Other <b>10%</b></p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Top Lenders</h2>
+          <div id="lenders"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Funding Calculator</h2>
+          <input id="purchase" type="number" placeholder="Purchase Price">
+          <input id="rehab" type="number" placeholder="Rehab">
+          <input id="arv" type="number" placeholder="ARV">
+          <input id="rent" type="number" placeholder="Rent (Monthly)">
+          <button class="gold full-btn" onclick="calc()">Calculate</button>
+          <pre id="result"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="alertsSection" class="section panel">
+      <div class="panel-head"><h2>🚨 Deal Alerts</h2><button onclick="sendTopSMS()">Send Top SMS</button></div>
+      <div id="allAlerts"></div>
+    </section>
+
+    <section id="pipelineSection" class="section panel">
+      <h2>📊 Deal Pipeline</h2>
+      <div class="table-wrap"><table id="deals"></table></div>
+    </section>
+
+    <section id="createSection" class="section panel">
+      <h2>📂 Create New Deal</h2>
+      <input id="newAddress" placeholder="Address">
+      <input id="newCity" placeholder="City">
+      <input id="newState" placeholder="State">
+      <input id="newUnits" type="number" placeholder="Units">
+      <input id="newPrice" type="number" placeholder="Purchase Price">
+      <input id="newArv" type="number" placeholder="ARV">
+      <input id="newRehab" type="number" placeholder="Rehab">
+      <input id="newRent" type="number" placeholder="Monthly Rent">
+      <input id="newPhone" placeholder="Seller Phone">
+      <input id="newImage" placeholder="House Image URL">
+      <button onclick="createDeal()">Create Deal</button>
+    </section>
+
+    <section id="calculatorSection" class="section panel">
+      <h2>💰 Funding Calculator</h2>
+      <input id="purchase2" type="number" placeholder="Purchase Price">
+      <input id="rehab2" type="number" placeholder="Rehab">
+      <input id="arv2" type="number" placeholder="ARV">
+      <input id="rent2" type="number" placeholder="Rent">
+      <button onclick="calc2()">Calculate</button>
+      <pre id="result2"></pre>
+    </section>
+
+    <section id="uploadSection" class="section panel">
+      <h2>⬆️ CSV Upload</h2>
+      <input type="file" id="csvFile" accept=".csv">
+      <button onclick="uploadCSV()">Upload CSV</button>
+      <button onclick="downloadCSV()">Download Current CSV</button>
+    </section>
+
+    <section id="aiSection" class="section panel">
+      <h2>🤖 AI Deal Finder</h2>
+      <button onclick="runAIFinder()">Score All Deals</button>
+      <pre id="aiOutput"></pre>
+    </section>
+
+    <section id="skipSection" class="section panel">
+      <h2>📞 Skip Tracing</h2>
+      <p>Upload phone/email columns in your CSV. Call and SMS buttons activate automatically.</p>
+      <div id="skipList"></div>
+    </section>
+
+    <section id="calendarSection" class="section panel"><h2>📅 Calendar</h2><p>Follow-up calendar placeholder active.</p></section>
+    <section id="messagesSection" class="section panel"><h2>✉️ Messages</h2><p>SMS links open your phone messaging app.</p></section>
+    <section id="reportsSection" class="section panel"><h2>📁 Reports</h2><button onclick="downloadCSV()">Export Report CSV</button></section>
+    <section id="settingsSection" class="section panel"><h2>⚙️ Settings</h2><button onclick="logout()">Logout</button></section>
+    <section id="helpSection" class="section panel"><h2>❓ Help & Support</h2><p>Upload CSV → score deals → call sellers → calculate funding.</p></section>
+
+  </main>
+</div>
+
+<div class="bottom-nav">
+  <button onclick="showSection('dashboardSection')">🏠<small>Dashboard</small></button>
+  <button onclick="showSection('pipelineSection')">📊<small>Deals</small></button>
+  <button onclick="showSection('alertsSection')">🚨<small>Alerts</small></button>
+  <button onclick="showSection('calculatorSection')">💰<small>Calculator</small></button>
+  <button onclick="toggleSidebar()">☰<small>More</small></button>
+</div>
 
 <script src="app.js"></script>
 </body>
