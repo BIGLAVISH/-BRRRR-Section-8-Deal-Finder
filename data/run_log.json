@@ -1,11 +1,5 @@
 {
-  "updated_at": "2026-04-30T14:03:22.399Z",
-  "source_logs": [
-    {
-      "source": "Sample Atlanta + Bibb County Feed",
-      "status": "ok",
-      "rows": 5
-    }
-  ],
-  "deals_found": 5
+  "updated_at": "2026-05-01T15:35:38.157Z",
+  "pulled": 5,
+  "saved": 5
 }
